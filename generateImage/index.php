@@ -22,7 +22,7 @@ if(isset($_GET["TYPE"]))
 }
 
 
-$homepage = file_get_contents('https://api.bitcoinaverage.com/ticker/'.$currency.'/');
+$homepage = file_get_contents('https://apiv2.bitcoinaverage.com/ticker/'.$currency.'/');
 $json = json_decode($homepage,true);
 
 $timestamp="";
