@@ -3,7 +3,7 @@ Php script for bitcoin price image generation
 
 Use like this (demo):
 http://amacar.tk/generateImage/index.php/?VALUE=10&CUR=USD&TYPE=24h_avg&TIMESTAMP=YES&PRECISION=7&COLOR=0000FF&SIZE=12&FONT=calibri
-![alt tag]()
+![alt tag](http://amacar.tk/generateImage/index.php/?VALUE=10&CUR=USD&TYPE=24h_avg&TIMESTAMP=YES&PRECISION=7&COLOR=0000FF&SIZE=12&FONT=calibri)
 
 Parameter VALUE is just amount you want to convert to BTC
 
