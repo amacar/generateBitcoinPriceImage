@@ -15,21 +15,25 @@ if(isset($_GET["VALUE"]))
 	$value=$_GET["VALUE"];
 }
 
-$price='last';
+$prices='last';
 if(isset($_GET["TYPE"]))
 {
-	$price=strtolower($_GET["TYPE"]);
+	$prices=strtolower($_GET["TYPE"]);
+	if($prices == '24h_avg')
+	{
+		$prices = 'averages,day';
+	}
 }
 
 
-$homepage = file_get_contents('https://apiv2.bitcoinaverage.com/ticker/'.$currency.'/');
+$homepage = file_get_contents('https://apiv2.bitcoinaverage.com/indices/global/ticker/BTC'.$currency);
 $json = json_decode($homepage,true);
 
 $timestamp="";
 if(isset($_GET["TIMESTAMP"]))
 {
 	if(strtolower($_GET["TIMESTAMP"])=="yes")
-		$timestamp=$json["timestamp"];
+		$timestamp=$json["display_timestamp"];
 }
 
 $precision=5;
@@ -56,7 +60,12 @@ if(isset($_GET["OPACITY"]))
 	$opacity=$_GET["OPACITY"];
 }
 
-$text= (round($value/doubleval($json[$price]),$precision))." BTC  ".substr($timestamp,0,strlen($timestamp)-6);
+$prices = explode(",", $prices);
+$jsonPrice = $json;
+foreach ($prices as $price) {
+    $jsonPrice = $jsonPrice[$price];
+}
+$text = (round($value/doubleval($jsonPrice),$precision))." BTC  ".$timestamp;
 
 header('Content-Type: image/png');
 
